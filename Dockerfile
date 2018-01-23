@@ -13,6 +13,15 @@ ENV SBT_VERSION 0.13.16
 # Scala expects this file
 RUN touch /usr/lib/jvm/java-8-openjdk-amd64/release
 
+# Install Docker
+RUN \
+  apt-get update && \
+  apt-get install -y apt-transport-https && \
+  echo 'deb https://apt.dockerproject.org/repo debian-stretch main' >> /etc/apt/sources.list && \
+  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+  apt-get update && \
+  apt-get install -y docker-engine
+
 # Install Scala
 ## Piping curl directly in tar
 RUN \
